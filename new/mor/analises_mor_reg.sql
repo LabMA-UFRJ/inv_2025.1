@@ -1,3 +1,6 @@
+
+CREATE VIEW ANALISES_MOR_REG AS
+
 WITH 
 CTE_AT_MOR AS (    
     SELECT 
@@ -16,7 +19,7 @@ CTE_AT_MOR AS (
         SUM(CASE WHEN EXTRACT(YEAR FROM DATA_INGR) > 1900 THEN 1 ELSE 0 END) 
         AS QTDE_GERAL_AT
         
-    FROM dados_parquet.at_mor_000
+    FROM dados_parquet.at_mor_000 
     WHERE 
         LINHA_VALIDA = 1
     GROUP BY 
