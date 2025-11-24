@@ -8,20 +8,97 @@ import re
 import sys
 import uuid
 from datetime import datetime
-from notifier import Notifier
+import platform
+import struct
+import argparse
+#from notifier import Notifier
 
 # --- Configuration ---
-DB_USER = ""
-DB_PASSWORD = ""
+DB_USER = "GABRIEL_M"
+DB_PASSWORD = "m0ulrlyc"
 db_name = "tabuas"
 port = "1521"
-DB_DSN = f"192.168.10.103:{port}/{db_name}"
+DB_DSN = f"192.168.10.111:{port}/{db_name}"
 
 block_size = 5000000
 
-CONFIG_FILE = r"pipeline_tasks.csv"
+CONFIG_FILE = "script\pipeline_tasks.csv"
 VERBOSE_LOG_FILE = "pipeline_run.log"
 SUMMARY_LOG_FILE = "pipeline_summary.csv"
+
+def get_connection(lib_dir=None):
+    """Attempt to connect using thin mode first. If the server version is
+    incompatible with thin mode, try to initialize the Oracle Instant Client
+    (thick mode) and reconnect.
+
+    Args:
+        lib_dir (str, optional): Path to Oracle Instant Client directory.
+                                 If provided, will be used for thick mode initialization.
+
+    Returns a live oracledb connection or raises the original exception with
+    additional diagnostics.
+    """
+    try:
+        logging.info("Attempting to connect in thin mode to %s", DB_DSN)
+        conn = oracledb.connect(user=DB_USER, password=DB_PASSWORD, dsn=DB_DSN)
+        logging.info("Connected using python-oracledb thin mode.")
+        return conn
+    except oracledb.DatabaseError as e:
+        msg = str(e)
+        # Detect the common incompatibility message that indicates the
+        # server version doesn't support thin mode.
+        if 'not supported by python-oracledb in thin mode' in msg or 'thin mode' in msg and 'not supported' in msg:
+            logging.warning("Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).")
+            # Try to initialize the Oracle Instant Client. If the client is
+            # installed and on PATH (Windows) or LD_LIBRARY_PATH (Unix), the
+            # call without lib_dir should work. If not, a helpful error will
+            # be logged and the exception re-raised.
+            try:
+                logging.info("Calling oracledb.init_oracle_client() to enable thick mode.")
+                # Allow users to specify the Instant Client directory via CLI arg or env var
+                client_lib_dir = lib_dir or os.environ.get('ORACLE_CLIENT_LIB_DIR')
+                if client_lib_dir:
+                    logging.info("Using ORACLE_CLIENT_LIB_DIR=%s", client_lib_dir)
+                    oracledb.init_oracle_client(lib_dir=client_lib_dir)
+                else:
+                    oracledb.init_oracle_client()
+            except Exception as init_err:
+                logging.error("Failed to initialize Oracle Instant Client: %s", init_err)
+                # Provide extra diagnostics for DPI-1047 (missing library / bitness mismatch)
+                try:
+                    err_str = str(init_err)
+                except Exception:
+                    err_str = None
+                if err_str and 'DPI-1047' in err_str or err_str and 'Cannot locate a' in err_str:
+                    # Log platform and Python/oracledb bitness to help the user diagnose
+                    py_bits = struct.calcsize('P') * 8
+                    logging.error("Detected DPI-1047: possible missing Oracle Client or bitness mismatch.")
+                    logging.error("Python executable: %s", sys.executable)
+                    logging.error("Python version: %s", platform.python_version())
+                    logging.error("Python architecture (bits): %s", py_bits)
+                    try:
+                        logging.error("python-oracledb version: %s", getattr(oracledb, '__version__', 'unknown'))
+                    except Exception:
+                        pass
+                    logging.error("ORACLE_CLIENT_LIB_DIR=%s", os.environ.get('ORACLE_CLIENT_LIB_DIR'))
+                    logging.error("Reminder: install the 64-bit Oracle Instant Client that matches your Python bitness and add it to PATH, or set ORACLE_CLIENT_LIB_DIR to the Instant Client folder.")
+                logging.error(
+                    "To use thick mode you must install Oracle Instant Client and either add its directory to PATH (Windows) or set LD_LIBRARY_PATH (Unix), or pass lib_dir to init_oracle_client()."
+                )
+                # Re-raise original (or new) exception so caller knows connect failed
+                raise
+
+            # Retry connection in thick mode
+            try:
+                conn = oracledb.connect(user=DB_USER, password=DB_PASSWORD, dsn=DB_DSN)
+                logging.info("Connected using python-oracledb thick mode (Instant Client).")
+                return conn
+            except Exception as thick_exc:
+                logging.error("Failed to connect in thick mode: %s", thick_exc)
+                raise
+        else:
+            # Some other DatabaseError — re-raise for the caller to handle
+            raise
 
 # --- Setup ---
 logging.basicConfig(
@@ -31,8 +108,6 @@ logging.basicConfig(
 )
 
 SUMMARY_HEADER = ['run_id', 'task_name', 'start_time', 'end_time', 'duration_seconds', 'status', 'error_message']
-
-oracledb.init_oracle_client(r"C:\instantclient_23_8")
 
 def log_summary(run_id, task_name, start_time, end_time, status, error_msg=None):
     """Writes a summary of a task's execution to a local CSV file."""
@@ -115,12 +190,16 @@ def execute_python_task(script_path):
     logging.info(f"Successfully finished Python script: {script_path}")
     logging.info(f"Python script output:\n{result.stdout}")
 
-def main():
-    """Main pipeline execution function."""
+def main(lib_dir=None):
+    """Main pipeline execution function.
+    
+    Args:
+        lib_dir (str, optional): Path to Oracle Instant Client directory.
+    """
     run_id = str(uuid.uuid4())
     logging.info(f"--- Starting Pipeline Run ID: {run_id} ---")
 
-    notifier = Notifier()
+    #notifier = Notifier()
 
     try:
         with open(CONFIG_FILE, mode='r', newline='', encoding='utf-8') as f:
@@ -129,16 +208,17 @@ def main():
     except FileNotFoundError:
         error_msg = f"Configuration file not found: {CONFIG_FILE}"
         logging.error(error_msg)
-        notifier.send_alert(
+        """ notifier.send_alert(
             subject="CRITICAL: Pipeline Configuration File Missing",
             message_body=f"Run ID: {run_id}\n\n{error_msg}"
-        )
+        ) """
         return
 
     connection = None
     pipeline_failed = False
     try:
-        connection = oracledb.connect(user=DB_USER, password=DB_PASSWORD, dsn=DB_DSN)
+        # Establish a connection (thin mode first, fallback to thick if needed)
+        connection = get_connection(lib_dir=lib_dir)
         with connection.cursor() as cursor:
             for task in tasks:
                 if task['enabled'] != '1':
@@ -169,9 +249,9 @@ def main():
                         f"Status: SUCESS\n\n"
                         f"Time taken:{end_time - start_time}"
                     )
-                    notifier.send_alert(
+                    """ notifier.send_alert(
                                     subject=subject,
-                                    message_body=message_body)
+                                    message_body=message_body) """
                 except Exception as e:
                     pipeline_failed = True
                     end_time = time.time()
@@ -188,7 +268,7 @@ def main():
                         f"Status: FAILURE\n\n"
                         f"Error Details:\n{error_details}"
                     )
-                    notifier.send_alert(subject, message_body)
+                    #notifier.send_alert(subject, message_body)
 
                     break # Stop pipeline on first failure
 
@@ -196,19 +276,20 @@ def main():
         pipeline_failed = True
         error_msg = f"A critical database connection error occurred: {e}"
         logging.critical(error_msg)
-        notifier.send_alert(
+        """ notifier.send_alert(
             subject="CRITICAL: Pipeline Database Connection Failure",
             message_body=f"Run ID: {run_id}\n\nThe pipeline could not connect to the database.\n\nError:\n{error_msg}"
-        )
+        ) """
 
     except Exception as e:
         pipeline_failed = True
         error_msg = f"An unexpected orchestrator error occurred: {e}"
         logging.critical(error_msg, exc_info=True)
-        notifier.send_alert(
+        
+        """ notifier.send_alert(
             subject="CRITICAL: Pipeline Orchestrator Failure",
             message_body=f"Run ID: {run_id}\n\nThe main script encountered an unexpected error.\n\nError:\n{error_msg}"
-        )
+        ) """
 
     finally:
         if connection:
@@ -223,3 +304,15 @@ def main():
         logging.info(f"--- Pipeline Run {run_id} COMPLETED SUCCESSFULLY. ---")
 
 
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Oracle Database pipeline runner. Attempts to connect in thin mode, falls back to thick mode if needed.'
+    )
+    parser.add_argument(
+        '--lib-dir',
+        type=str,
+        default=None,
+        help=r'Path to Oracle Instant Client directory for thick mode (e.g., C:\oracle\instantclient_21_9). If not provided, ORACLE_CLIENT_LIB_DIR env var will be checked.'
+    )
+    args = parser.parse_args()
+    main(lib_dir=args.lib_dir)
