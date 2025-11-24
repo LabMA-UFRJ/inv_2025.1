@@ -1,0 +1,2 @@
+run_id,task_name,start_time,end_time,duration_seconds,status,error_message
+e6e717d9-f0b3-49b4-a57a-b3b33a163887,inv_ind,2025-11-24T18:26:39.392114,2025-11-24T18:26:39.393120,0.0,FAILURE,[Errno 2] No such file or directory: 'new/inv/analises_inv_ind.sql'

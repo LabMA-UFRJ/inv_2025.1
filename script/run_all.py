@@ -22,7 +22,7 @@ DB_DSN = f"192.168.10.111:{port}/{db_name}"
 
 block_size = 5000000
 
-CONFIG_FILE = "script\pipeline_tasks.csv"
+CONFIG_FILE = "./pipeline_tasks.csv"
 VERBOSE_LOG_FILE = "pipeline_run.log"
 SUMMARY_LOG_FILE = "pipeline_summary.csv"
 
