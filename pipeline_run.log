@@ -1,0 +1,25 @@
+2025-11-24 18:02:43,250 - INFO - --- Starting Pipeline Run ID: 908e5824-d7e8-42cb-839f-f4ba5d742f3d ---
+2025-11-24 18:02:43,250 - ERROR - Configuration file not found: pipeline_tasks.csv
+2025-11-24 18:03:27,270 - INFO - --- Starting Pipeline Run ID: 6bcda2db-2abb-4ef2-85a4-9a278f5ea88a ---
+2025-11-24 18:03:27,270 - ERROR - Configuration file not found: pipeline_tasks.csv
+2025-11-24 18:04:09,829 - INFO - --- Starting Pipeline Run ID: 1bd9b7c1-2558-4f58-8456-5c7d8844199a ---
+2025-11-24 18:04:09,829 - ERROR - Configuration file not found: pipeline_tasks.csv
+2025-11-24 18:06:22,019 - INFO - --- Starting Pipeline Run ID: b4c05730-89e2-408e-9033-2de93b31feb4 ---
+2025-11-24 18:06:22,021 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 18:06:22,052 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 18:06:22,052 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 18:06:22,052 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-24 18:06:22,229 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-24 18:06:22,229 - INFO - Executing SQL script: analises_inv_cpf_uni.sql
+2025-11-24 18:06:22,229 - ERROR - An unexpected error occurred while processing the SQL script: analises_inv_cpf_uni.sql
+2025-11-24 18:06:22,229 - ERROR - !!! TASK FAILED: inv_cpf !!!
+2025-11-24 18:06:22,229 - ERROR - Error details: [Errno 2] No such file or directory: 'analises_inv_cpf_uni.sql'
+2025-11-24 18:06:22,245 - WARNING - Rolling back any uncommitted transaction due to failure.
+2025-11-24 18:06:22,250 - ERROR - --- Pipeline Run b4c05730-89e2-408e-9033-2de93b31feb4 FAILED. ---
+2025-11-24 18:09:08,095 - INFO - --- Starting Pipeline Run ID: ae173e99-0db8-453c-be17-ca262ae1857a ---
+2025-11-24 18:09:08,105 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 18:09:08,141 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 18:09:08,142 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 18:09:08,142 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-24 18:09:08,241 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-24 18:09:08,241 - INFO - Executing SQL script: new/inv/analises_inv_cpf_uni.sql

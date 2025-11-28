@@ -12,13 +12,17 @@ import platform
 import struct
 import argparse
 #from notifier import Notifier
+from extract_files import extract_csv_from_table
+from dotenv import load_dotenv
+load_dotenv()
 
 # --- Configuration ---
-DB_USER = "GABRIEL_M"
-DB_PASSWORD = "m0ulrlyc"
-db_name = "tabuas"
-port = "1521"
-DB_DSN = f"192.168.10.111:{port}/{db_name}"
+
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+db_name = os.getenv("DB_NAME")
+port = os.getenv("DB_PORT", "1521")
+DB_DSN = f"{os.getenv('DB_HOST')}:{port}/{db_name}"
 
 block_size = 5000000
 
@@ -190,6 +194,24 @@ def execute_python_task(script_path):
     logging.info(f"Successfully finished Python script: {script_path}")
     logging.info(f"Python script output:\n{result.stdout}")
 
+def execute_extraction_task(connection, table_name, output_path):
+    """Extracts data from a database table and saves as CSV."""
+    logging.info(f"Extracting table '{table_name}' to {output_path}")
+    try:
+        # Create output directory if it doesn't exist
+        output_dir = os.path.dirname(output_path)
+        if output_dir and not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+            logging.debug(f"Created output directory: {output_dir}")
+        
+        # Extract data using the helper function
+        df = extract_csv_from_table(connection, table_name, output_path)
+        row_count = len(df)
+        logging.info(f"Successfully extracted {row_count} rows from table '{table_name}' to {output_path}")
+    except Exception as e:
+        logging.error(f"Failed to extract table '{table_name}': {e}")
+        raise
+
 def main(lib_dir=None):
     """Main pipeline execution function.
     
@@ -235,6 +257,11 @@ def main(lib_dir=None):
                         execute_sql_task(cursor, script_path)
                     elif task_type == 'PYTHON':
                         execute_python_task(script_path)
+                    elif task_type == 'EXTRACTION':
+                        # For EXTRACTION tasks: script_path is the table name, task_name is the output file
+                        table_name = script_path
+                        output_path = task_name
+                        execute_extraction_task(connection, table_name, output_path)
                     else:
                         raise ValueError(f"Unknown task type '{task_type}' for task '{task_name}'")
 

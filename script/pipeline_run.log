@@ -1,0 +1,139 @@
+2025-11-24 12:54:48,789 - INFO - --- Starting Pipeline Run ID: 0d297b12-2ee1-4a17-9b5d-c695cd68df2e ---
+2025-11-24 12:54:48,869 - CRITICAL - A critical database connection error occurred: DPY-6005: cannot connect to database (CONNECTION_ID=sU/X/NLbysp7M8ioRg7TOw==).
+DPY-3010: connections to this database server version are not supported by python-oracledb in thin mode
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpy-3010
+2025-11-24 12:54:48,871 - ERROR - --- Pipeline Run 0d297b12-2ee1-4a17-9b5d-c695cd68df2e FAILED. ---
+2025-11-24 16:27:36,118 - INFO - --- Starting Pipeline Run ID: 6bed7d6c-fa0e-4979-a39a-5948a19b6fc2 ---
+2025-11-24 16:27:36,120 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 16:27:36,152 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 16:27:36,152 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 16:27:36,156 - ERROR - Failed to initialize Oracle Instant Client: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:27:36,156 - ERROR - To use thick mode you must install Oracle Instant Client and either add its directory to PATH (Windows) or set LD_LIBRARY_PATH (Unix), or pass lib_dir to init_oracle_client().
+2025-11-24 16:27:36,156 - CRITICAL - A critical database connection error occurred: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:27:36,156 - ERROR - --- Pipeline Run 6bed7d6c-fa0e-4979-a39a-5948a19b6fc2 FAILED. ---
+2025-11-24 16:28:22,531 - INFO - --- Starting Pipeline Run ID: 50b7bfe3-3e55-4973-95d3-db28c0f13a96 ---
+2025-11-24 16:28:22,531 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 16:28:22,561 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 16:28:22,561 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 16:28:22,563 - ERROR - Failed to initialize Oracle Instant Client: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:28:22,563 - ERROR - To use thick mode you must install Oracle Instant Client and either add its directory to PATH (Windows) or set LD_LIBRARY_PATH (Unix), or pass lib_dir to init_oracle_client().
+2025-11-24 16:28:22,563 - CRITICAL - A critical database connection error occurred: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:28:22,564 - ERROR - --- Pipeline Run 50b7bfe3-3e55-4973-95d3-db28c0f13a96 FAILED. ---
+2025-11-24 16:38:30,516 - INFO - --- Starting Pipeline Run ID: 3ffd8ff4-5a2a-47d9-9fc1-befea7393293 ---
+2025-11-24 16:38:30,517 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 16:38:30,554 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 16:38:30,555 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 16:38:30,556 - ERROR - Failed to initialize Oracle Instant Client: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:38:30,557 - ERROR - Detected DPI-1047: possible missing Oracle Client or bitness mismatch.
+2025-11-24 16:38:30,557 - ERROR - Python executable: C:\Program Files\Python312\python.exe
+2025-11-24 16:38:30,558 - ERROR - Python version: 3.12.4
+2025-11-24 16:38:30,558 - ERROR - Python architecture (bits): 64
+2025-11-24 16:38:30,558 - ERROR - python-oracledb version: 3.4.1
+2025-11-24 16:38:30,558 - ERROR - ORACLE_CLIENT_LIB_DIR=None
+2025-11-24 16:38:30,559 - ERROR - Reminder: install the 64-bit Oracle Instant Client that matches your Python bitness and add it to PATH, or set ORACLE_CLIENT_LIB_DIR to the Instant Client folder.
+2025-11-24 16:38:30,559 - ERROR - To use thick mode you must install Oracle Instant Client and either add its directory to PATH (Windows) or set LD_LIBRARY_PATH (Unix), or pass lib_dir to init_oracle_client().
+2025-11-24 16:38:30,559 - CRITICAL - A critical database connection error occurred: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://python-oracledb.readthedocs.io/en/latest/user_guide/initialization.html for help
+Help: https://python-oracledb.readthedocs.io/en/latest/user_guide/troubleshooting.html#dpi-1047
+2025-11-24 16:38:30,559 - ERROR - --- Pipeline Run 3ffd8ff4-5a2a-47d9-9fc1-befea7393293 FAILED. ---
+2025-11-24 18:25:27,627 - INFO - --- Starting Pipeline Run ID: 088ad48d-8597-4ea3-97f9-5e9dc507e730 ---
+2025-11-24 18:25:27,627 - ERROR - Configuration file not found: script\pipeline_tasks.csv
+2025-11-24 18:26:15,154 - INFO - --- Starting Pipeline Run ID: 57d2ebf3-dc4c-42ba-baac-00029d7fb1c7 ---
+2025-11-24 18:26:15,154 - ERROR - Configuration file not found: \pipeline_tasks.csv
+2025-11-24 18:26:26,368 - INFO - --- Starting Pipeline Run ID: 6bc6c3d8-2d60-4468-92ff-7845bb775ce1 ---
+2025-11-24 18:26:26,368 - ERROR - Configuration file not found: scripts/pipeline_tasks.csv
+2025-11-24 18:26:39,236 - INFO - --- Starting Pipeline Run ID: e6e717d9-f0b3-49b4-a57a-b3b33a163887 ---
+2025-11-24 18:26:39,243 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 18:26:39,280 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 18:26:39,280 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 18:26:39,280 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-24 18:26:39,392 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-24 18:26:39,392 - INFO - Skipping disabled task: inv_cpf
+2025-11-24 18:26:39,392 - INFO - Skipping disabled task: inv_reg
+2025-11-24 18:26:39,392 - INFO - Executing SQL script: new/inv/analises_inv_ind.sql
+2025-11-24 18:26:39,393 - ERROR - An unexpected error occurred while processing the SQL script: new/inv/analises_inv_ind.sql
+2025-11-24 18:26:39,393 - ERROR - !!! TASK FAILED: inv_ind !!!
+2025-11-24 18:26:39,393 - ERROR - Error details: [Errno 2] No such file or directory: 'new/inv/analises_inv_ind.sql'
+2025-11-24 18:26:39,393 - WARNING - Rolling back any uncommitted transaction due to failure.
+2025-11-24 18:26:39,416 - ERROR - --- Pipeline Run e6e717d9-f0b3-49b4-a57a-b3b33a163887 FAILED. ---
+2025-11-24 18:30:07,099 - INFO - --- Starting Pipeline Run ID: 6d19a2c2-4690-44d8-82fe-44e2a49de93c ---
+2025-11-24 18:30:07,107 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-24 18:30:07,135 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-24 18:30:07,135 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-24 18:30:07,135 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-24 18:30:07,362 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-24 18:30:07,362 - INFO - Skipping disabled task: inv_cpf
+2025-11-24 18:30:07,363 - INFO - Skipping disabled task: inv_reg
+2025-11-24 18:30:07,363 - INFO - Executing SQL script: run/inv/analises_inv_ind.sql
+2025-11-25 07:15:08,520 - INFO - Successfully finished SQL script: run/inv/analises_inv_ind.sql
+2025-11-25 07:15:08,528 - INFO - Executing SQL script: run/mor/analises_mor_cpf_uni.sql
+2025-11-25 07:15:08,717 - INFO - Successfully finished SQL script: run/mor/analises_mor_cpf_uni.sql
+2025-11-25 07:15:08,721 - INFO - Skipping disabled task: mor_reg
+2025-11-25 07:15:08,722 - INFO - Skipping disabled task: mor_ind
+2025-11-25 07:15:08,722 - INFO - Skipping disabled task: sob_cpf
+2025-11-25 07:15:08,723 - INFO - Executing SQL script: run/sob/analises_sob_reg.sql
+2025-11-25 07:22:55,956 - INFO - Successfully finished SQL script: run/sob/analises_sob_reg.sql
+2025-11-25 07:22:55,960 - INFO - Executing SQL script: run/sob/analises_sob_ind.sql
+2025-11-25 08:51:37,927 - INFO - Successfully finished SQL script: run/sob/analises_sob_ind.sql
+2025-11-25 08:51:37,957 - INFO - --- Pipeline Run 6d19a2c2-4690-44d8-82fe-44e2a49de93c COMPLETED SUCCESSFULLY. ---
+2025-11-25 12:17:46,203 - INFO - --- Starting Pipeline Run ID: d45080f8-54f9-41a9-ae95-0d60eb3a8c17 ---
+2025-11-25 12:17:46,210 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-25 12:17:46,282 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-25 12:17:46,282 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-25 12:17:46,283 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-25 12:17:47,017 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-25 12:17:47,018 - INFO - Skipping disabled task: inv_cpf
+2025-11-25 12:17:47,019 - INFO - Skipping disabled task: inv_reg
+2025-11-25 12:17:47,020 - INFO - Executing SQL script: run/inv/analises_inv_ind.sql
+2025-11-25 12:17:47,067 - ERROR - A database error occurred in script: run/inv/analises_inv_ind.sql
+2025-11-25 12:17:47,067 - ERROR - Oracle Error Code: 955
+2025-11-25 12:17:47,067 - ERROR - Oracle Error Message: ORA-00955: name is already used by an existing object
+2025-11-25 12:17:47,067 - ERROR - Error occurred near offset: 39
+2025-11-25 12:17:47,067 - ERROR - !!! TASK FAILED: inv_ind !!!
+2025-11-25 12:17:47,068 - ERROR - Error details: ORA-00955: name is already used by an existing object
+2025-11-25 12:17:47,069 - WARNING - Rolling back any uncommitted transaction due to failure.
+2025-11-25 12:17:47,088 - ERROR - --- Pipeline Run d45080f8-54f9-41a9-ae95-0d60eb3a8c17 FAILED. ---
+2025-11-25 12:18:06,509 - INFO - --- Starting Pipeline Run ID: 7bb54f29-7056-415a-b6ee-8d968e221409 ---
+2025-11-25 12:18:06,517 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-25 12:18:06,532 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-25 12:18:06,532 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-25 12:18:06,532 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-25 12:18:06,706 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-25 12:18:06,707 - INFO - Executing SQL script: run/inv/analises_inv_cpf_uni.sql
+2025-11-25 12:46:48,659 - INFO - --- Starting Pipeline Run ID: 5d4f425f-4b68-4517-a2d5-caf42b6ab3f4 ---
+2025-11-25 12:46:48,660 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-25 12:46:48,690 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-25 12:46:48,690 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-25 12:46:48,690 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-25 12:46:48,969 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-25 12:46:48,969 - INFO - Executing SQL script: run/inv/analises_inv_cpf_uni.sql
+2025-11-25 12:47:30,363 - INFO - --- Starting Pipeline Run ID: 8b2c5095-fd1b-4317-a8c9-6d844b8d255f ---
+2025-11-25 12:47:30,372 - INFO - Attempting to connect in thin mode to 192.168.10.111:1521/tabuas
+2025-11-25 12:47:30,405 - WARNING - Server appears incompatible with thin mode. Will attempt thick mode (Oracle Instant Client).
+2025-11-25 12:47:30,406 - INFO - Calling oracledb.init_oracle_client() to enable thick mode.
+2025-11-25 12:47:30,406 - INFO - Using ORACLE_CLIENT_LIB_DIR=C:\oracle\instantclient_21_19
+2025-11-25 12:47:30,528 - INFO - Connected using python-oracledb thick mode (Instant Client).
+2025-11-25 12:47:30,528 - INFO - Executing SQL script: run/inv/analises_inv_cpf_uni.sql
+2025-11-25 21:04:18,909 - INFO - Successfully finished SQL script: run/inv/analises_inv_cpf_uni.sql
+2025-11-25 21:04:18,914 - INFO - Executing SQL script: run/inv/analises_inv_reg.sql
+2025-11-25 21:42:30,225 - INFO - Successfully finished SQL script: run/inv/analises_inv_reg.sql
+2025-11-25 21:42:30,229 - INFO - Skipping disabled task: inv_ind
+2025-11-25 21:42:30,230 - INFO - Executing SQL script: run/mor/analises_mor_cpf_uni.sql
+2025-11-25 23:27:35,458 - INFO - Successfully finished SQL script: run/mor/analises_mor_cpf_uni.sql
+2025-11-25 23:27:35,460 - INFO - Executing SQL script: run/mor/analises_mor_reg.sql
+2025-11-26 00:23:09,678 - INFO - Successfully finished SQL script: run/mor/analises_mor_reg.sql
+2025-11-26 00:23:09,686 - INFO - Executing SQL script: run/mor/analises_mor_ind.sql
+2025-11-26 14:34:39,988 - INFO - Successfully finished SQL script: run/mor/analises_mor_ind.sql
+2025-11-26 14:34:39,996 - INFO - Executing SQL script: run/sob/analises_sob_cpf_uni.sql
+2025-11-26 14:34:40,026 - ERROR - A database error occurred in script: run/sob/analises_sob_cpf_uni.sql
+2025-11-26 14:34:40,026 - ERROR - Oracle Error Code: 955
+2025-11-26 14:34:40,026 - ERROR - Oracle Error Message: ORA-00955: name is already used by an existing object
+2025-11-26 14:34:40,027 - ERROR - Error occurred near offset: 40
+2025-11-26 14:34:40,027 - ERROR - !!! TASK FAILED: sob_cpf !!!
+2025-11-26 14:34:40,027 - ERROR - Error details: ORA-00955: name is already used by an existing object
+2025-11-26 14:34:40,029 - WARNING - Rolling back any uncommitted transaction due to failure.
+2025-11-26 14:34:40,047 - ERROR - --- Pipeline Run 8b2c5095-fd1b-4317-a8c9-6d844b8d255f FAILED. ---
